@@ -4,7 +4,7 @@ namespace PokerDice
 {
 	public class DiceValues
 	{
-		public static Dictionary<string, int> Dice = new Dictionary<string, int>()
+		public static readonly Dictionary<string, int> Dice = new Dictionary<string, int>()
 		{
 			{"A", 14 },
 			{"K", 13 },

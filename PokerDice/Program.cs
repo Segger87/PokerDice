@@ -19,7 +19,7 @@ namespace PokerDice
 
 		private int ObtainNumOfPlayers()
 		{
-			int numOfPlayers;
+			int numOfPlayers = 0;
 			do
 			{
 				Console.WriteLine("Please type number of Players (2-5)");
@@ -27,7 +27,7 @@ namespace PokerDice
 
 			if (numOfPlayers < 2 || numOfPlayers > 5)
 			{
-				ObtainNumOfPlayers();
+				return ObtainNumOfPlayers();		
 			}
 
 			Console.WriteLine("You selected " + numOfPlayers + " players");
@@ -76,13 +76,14 @@ namespace PokerDice
 				}
 
 				player.DiceRolled[i - 1] = hand;
-
-				Console.WriteLine($"You rolled {player.DiceRolled[i - 1][0].Item1}, " +
-												$"{player.DiceRolled[i - 1][1].Item1}, " +
-												$"{player.DiceRolled[i - 1][2].Item1}, " +
-												$"{player.DiceRolled[i - 1][3].Item1}, " +
-												$"{player.DiceRolled[i -1][4].Item1}");
-
+				 
+				Console.ForegroundColor = ConsoleColor.Green;
+				Console.WriteLine($"{player.Name} rolled {player.DiceRolled[i - 1][0].Item1}, " +
+											 $"{player.DiceRolled[i - 1][1].Item1}, " +
+											 $"{player.DiceRolled[i - 1][2].Item1}, " +
+											 $"{player.DiceRolled[i - 1][3].Item1}, " +
+											 $"{player.DiceRolled[i -1][4].Item1}");
+				Console.ResetColor();
 			}
 
 			Console.WriteLine();
