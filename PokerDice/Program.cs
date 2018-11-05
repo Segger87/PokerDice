@@ -11,6 +11,7 @@ namespace PokerDice
 		static void Main(string[] args)
 		{
 			var p = new Program();
+			var b = new PokerRules();
 			int numOfPlayers = p.ObtainNumOfPlayers();
 			Player[] players = p.CreatePlayers(numOfPlayers);
 			p.RollDice(players);
@@ -62,29 +63,32 @@ namespace PokerDice
 			var diceDict = DiceValues.Dice;
 			player.DiceRolled = new Tuple<string, int>[3][];
 			Random random = new Random();
+			var pokerRules = new PokerRules();
 
 			for (int i = 1; i <= 3; i++)
 			{
-				var hand = new Tuple<string, int>[5];
+				var handArray = new Tuple<string, int>[5];
 				Console.WriteLine($"{player.Name} press enter to take dice roll number {i}");
 				Console.ReadLine();
 
 				for (int j = 0; j <= 4; j++)
 				{
 					var randomDice = diceDict.ElementAt(random.Next(0, diceDict.Count)).Key;
-					hand[j] = Tuple.Create(randomDice, diceDict[randomDice]);
+					handArray[j] = Tuple.Create(randomDice, diceDict[randomDice]);
 				}
 
-				player.DiceRolled[i - 1] = hand;
+				player.DiceRolled[i - 1] = handArray.OrderBy(x => x.Item2).ToArray();
 				 
 				Console.ForegroundColor = ConsoleColor.Green;
 				Console.WriteLine($"{player.Name} rolled {player.DiceRolled[i - 1][0].Item1}, " +
 											 $"{player.DiceRolled[i - 1][1].Item1}, " +
 											 $"{player.DiceRolled[i - 1][2].Item1}, " +
 											 $"{player.DiceRolled[i - 1][3].Item1}, " +
-											 $"{player.DiceRolled[i -1][4].Item1}");
+											 $"{player.DiceRolled[i - 1][4].Item1}");
 				Console.ResetColor();
 			}
+
+			pokerRules.FindMatchingDice(player);
 
 			Console.WriteLine();
 		}

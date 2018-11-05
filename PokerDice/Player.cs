@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PokerDice
 {
@@ -10,7 +7,7 @@ namespace PokerDice
 	{
 		public string Name { get; set; }
 		public Tuple<string, int>[][] DiceRolled { get; set; }
-		//public int[][] DiceValues { get; set; }
+		public List<int>[] HandWeight = new List<int>[3];
 
 		public Player(string name)
 		{
