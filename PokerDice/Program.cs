@@ -11,12 +11,10 @@ namespace PokerDice
 		static void Main(string[] args)
 		{
 			var p = new Program();
-
 			int numOfPlayers = p.ObtainNumOfPlayers();
 			Player[] players = p.CreatePlayers(numOfPlayers);
 			p.RollDice(players);
 			Console.ReadLine();
-			
 		}
 
 		private int ObtainNumOfPlayers()
@@ -27,7 +25,7 @@ namespace PokerDice
 				Console.WriteLine("Please type number of Players (2-5)");
 			} while (!int.TryParse(Console.ReadLine(), out numOfPlayers));
 
-			if(numOfPlayers < 2 || numOfPlayers > 5)
+			if (numOfPlayers < 2 || numOfPlayers > 5)
 			{
 				ObtainNumOfPlayers();
 			}
@@ -42,7 +40,7 @@ namespace PokerDice
 
 			for (int i = 1; i <= numOfPlayers; i++)
 			{
-				Console.WriteLine($"Player {i} please enter your name:" );
+				Console.WriteLine($"Player {i} please enter your name:");
 				var playerName = Console.ReadLine();
 				var newPlayer = new Player(playerName);
 				playerArray[i - 1] = newPlayer;
@@ -55,41 +53,37 @@ namespace PokerDice
 		{
 			foreach (var player in players)
 			{
-				for (int i = 1; i <= 3; i++)
-				{
-					Console.WriteLine($"{player.Name} press enter to take dice roll number {i}" );
-					Console.ReadLine();
-				}
 				RandomDiceRoll(player);
 			}
 		}
 
 		private void RandomDiceRoll(Player player)
 		{
-			//Array values = Enum.GetValues(typeof(DiceValues.Dice));
 			var diceDict = DiceValues.Dice;
-			player.DiceRolled = new string [3][];
-			player.DiceValues = new int[3][];
+			player.DiceRolled = new Tuple<string, int>[3][];
 			Random random = new Random();
 
-			for (int i = 0; i <= 2; i++)
+			for (int i = 1; i <= 3; i++)
 			{
-				//var diceArray = new DiceValues.Dice[6];
-				var hand = new string[5];
-				var value = new int[5];
+				var hand = new Tuple<string, int>[5];
+				Console.WriteLine($"{player.Name} press enter to take dice roll number {i}");
+				Console.ReadLine();
 
 				for (int j = 0; j <= 4; j++)
 				{
-					//var randomDice = (DiceValues.Dice)values.GetValue(random.Next(values.Length));
-					//player.DiceRolled[j] = randomDice;
-					hand[j] = diceDict.ElementAt(random.Next(0, diceDict.Count)).Key;
-					value[j] = diceDict[hand[j]];
+					var randomDice = diceDict.ElementAt(random.Next(0, diceDict.Count)).Key;
+					hand[j] = Tuple.Create(randomDice, diceDict[randomDice]);
 				}
 
-				player.DiceRolled[i] = hand;
-				player.DiceValues[i] = value;
-			}
+				player.DiceRolled[i - 1] = hand;
 
+				Console.WriteLine($"You rolled {player.DiceRolled[i - 1][0].Item1}, " +
+												$"{player.DiceRolled[i - 1][1].Item1}, " +
+												$"{player.DiceRolled[i - 1][2].Item1}, " +
+												$"{player.DiceRolled[i - 1][3].Item1}, " +
+												$"{player.DiceRolled[i -1][4].Item1}");
+
+			}
 
 			Console.WriteLine();
 		}
