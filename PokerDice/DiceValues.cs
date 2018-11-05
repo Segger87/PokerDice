@@ -1,15 +1,17 @@
-﻿namespace PokerDice
+﻿using System.Collections.Generic;
+
+namespace PokerDice
 {
-	class DiceValues
+	public class DiceValues
 	{
-		public enum Dice
+		public static Dictionary<string, int> Dice = new Dictionary<string, int>()
 		{
-			A = 14,
-			K = 13,
-			Q = 12,
-			J = 11,
-			TEN = 10,
-			NINE = 9
-		}
+			{"A", 14 },
+			{"K", 13 },
+			{"Q", 12 },
+			{"J", 11 },
+			{"10", 10 },
+			{"9", 9 }
+		};
 	}
 }

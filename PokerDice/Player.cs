@@ -9,8 +9,8 @@ namespace PokerDice
 	public class Player
 	{
 		public string Name { get; set; }
-		public string[] DiceRolled { get; set; }
-		public int[] DiceValues { get; set; }
+		public string[][] DiceRolled { get; set; }
+		public int[][] DiceValues { get; set; }
 
 		public Player(string name)
 		{
