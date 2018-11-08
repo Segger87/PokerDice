@@ -15,12 +15,14 @@ namespace PokerDice
 			int numOfPlayers = p.ObtainNumOfPlayers();
 			Player[] players = p.CreatePlayers(numOfPlayers);
 			p.RollDice(players);
+
 			Console.ReadLine();
 		}
 
 		private int ObtainNumOfPlayers()
 		{
 			int numOfPlayers = 0;
+
 			do
 			{
 				Console.WriteLine("Please type number of Players (2-5)");
@@ -86,9 +88,8 @@ namespace PokerDice
 											 $"{player.DiceRolled[i - 1][3].Item1}, " +
 											 $"{player.DiceRolled[i - 1][4].Item1}");
 				Console.ResetColor();
-			}
-
-			pokerRules.FindMatchingDice(player);
+				pokerRules.FindMatchingDice(player.DiceRolled[i - 1]);
+			}		
 
 			Console.WriteLine();
 		}
